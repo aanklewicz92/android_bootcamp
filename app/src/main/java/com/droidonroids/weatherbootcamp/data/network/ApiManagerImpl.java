@@ -10,7 +10,7 @@ public interface ApiManagerImpl {
 
 	void getWeatherWithCallback(String cityName, Callback<WeatherResponse> callback);
 
-	WeatherResponse getWeatherWithAsync(String cityName);
+	WeatherResponse getWeatherWithSync(String cityName);
 
 	Observable<ForecastResponse> getForecastWithObservable(String cityName);
 }

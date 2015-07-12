@@ -1,6 +1,6 @@
 package com.droidonroids.weatherbootcamp.data.network;
 
-import com.droidonroids.weatherbootcamp.data.network.api.RestAdapterApi;
+import com.droidonroids.weatherbootcamp.data.network.api.WeatherService;
 import com.droidonroids.weatherbootcamp.data.network.api.WeatherRequestInterceptor;
 import com.droidonroids.weatherbootcamp.data.network.consts.Const;
 import com.droidonroids.weatherbootcamp.data.network.entities.ForecastResponse;
@@ -12,11 +12,11 @@ import rx.Observable;
 
 public class ApiManager implements ApiManagerImpl {
 	private static final String TAG = ApiManager.class.getSimpleName();
-	private RestAdapterApi mRestAdapterApi;
+	private WeatherService mWeatherService;
 
 	public ApiManager() {
 		RestAdapter restAdapter = this.initRestAdapter();
-		mRestAdapterApi = restAdapter.create(RestAdapterApi.class);
+		mWeatherService = restAdapter.create(WeatherService.class);
 	}
 
 	private RestAdapter initRestAdapter() {
@@ -28,19 +28,19 @@ public class ApiManager implements ApiManagerImpl {
 	}
 
 	@Override public Observable<WeatherResponse> getWeatherWithObservable(String cityName) {
-		return mRestAdapterApi.getWeatherWithObservable(cityName);
+		return mWeatherService.getWeatherWithObservable(cityName);
 	}
 
 	@Override
 	public void getWeatherWithCallback(String cityName, Callback<WeatherResponse> callback) {
-		mRestAdapterApi.getWeatherWithCallback(cityName, callback);
+		mWeatherService.getWeatherWithCallback(cityName, callback);
 	}
 
-	@Override public WeatherResponse getWeatherWithAsync(String cityName) {
-		return mRestAdapterApi.getWeatherWithAsync(cityName);
+	@Override public WeatherResponse getWeatherWithSync(String cityName) {
+		return mWeatherService.getWeatherWithSync(cityName);
 	}
 
 	@Override public Observable<ForecastResponse> getForecastWithObservable(String cityName) {
-		return mRestAdapterApi.getForecastWithObservable(cityName);
+		return mWeatherService.getForecastWithObservable(cityName);
 	}
 }
